@@ -1,0 +1,40 @@
+---
+title: "Developing Data Products: R Markdown and Leafet"
+author: "Anna Teplukhina | `r Sys.Date()`"
+output: html_document
+---
+
+## Overview
+This project is dedicated to creating a web page using R Markdown that features an interactive map created by the Leaflet package.
+
+Below one can see an interactive map with major museums of natural history at the US East coast. There are multiple popups with active links to the museums' websites.
+
+## Creating a map with `leaflet`
+First, one should load the `leaflet` library
+```{r, echo=TRUE,warning=FALSE}
+library(leaflet)
+```
+Now, one can plot a map using GPS coordinates for four museum of natural history: American Museum of Natural History in New York City NY, The Academy of Natural Sciences of Drexel University in Philadelphia PA, Smithsonian National Museum of Natural History in Washington DC, and The Harvard Museum of Natural History in Cambridge MA.
+```{r}
+museumLatLong <- data.frame(
+lat = c(40.78140172300672, 39.95689275530413, 38.89143738792335, 42.378631982884635),
+lng = c(-73.97416953162872, -75.1713733316578, -77.02650528335741, -71.11557415380227))
+
+museumNames <- c(
+  "<a href='https://www.amnh.org/'> American Museum of Natural History </a",
+  "<a href='https://ansp.org/'> The Academy of Natural Sciences of Drexel University </a",
+  "<a href='https://www.naturalhistory.si.edu/'> Smithsonian National Museum of Natural History </a",
+  "<a href='https://hmnh.harvard.edu/'> The Harvard Museum of Natural History </a"
+)
+  
+museumLatLong %>%
+leaflet() %>%
+addTiles() %>%
+addMarkers(popup = museumNames)
+
+
+
+
+
+
+```
